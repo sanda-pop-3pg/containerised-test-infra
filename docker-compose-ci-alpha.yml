@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  selenium-host:
+    image: selenium/standalone-chrome:3.141.59-zirconium
+    networks:
+      - tests_network
+    ports:
+      - "4444:4444"
+      - "5901:5900"
+    volumes:
+      - "/dev/shm:/dev/shm"
+
+  test-integration:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: docker/scripts/wait_for_selenium.sh pytest -v -s --browser=chrome --junit-xml=/tmp/results/results.xml
+    depends_on:
+      - selenium-host
+    environment:
+      - PYTHONHASHSEED=0
+    env_file:
+      - docker/config/.env_demo
+    volumes:
+        - /tmp:/tmp/results/
+        - .:/rtc_docker_test_infra
+    networks:
+      - tests_network
+
+networks:
+  tests_network:
+    driver: bridge
