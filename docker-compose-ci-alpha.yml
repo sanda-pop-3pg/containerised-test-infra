@@ -2,7 +2,7 @@ version: '3'
 
 services:
   selenium-host:
-    image: selenium/standalone-chrome:3.141.59-zirconium
+    image: selenium/standalone-chrome:4.0.0-alpha-6-20200730
     networks:
       - tests_network
     ports:
