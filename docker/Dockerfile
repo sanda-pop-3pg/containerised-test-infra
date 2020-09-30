@@ -1,7 +1,7 @@
 FROM python:3.8.5-buster
 
-WORKDIR /rtc_docker_test_infra
-ADD . /rtc_docker_test_infra
+WORKDIR /containerised-test-infra
+ADD . /containerised-test-infra
 
 
 RUN pip install -r docker/config/requirements.txt

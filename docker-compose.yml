@@ -25,7 +25,7 @@ services:
       - docker/config/.env_demo
     volumes:
         - /tmp:/tmp/results/
-        - .:/rtc_docker_test_infra
+        - .:/containerised-test-infra
     networks:
       - tests_network
 
